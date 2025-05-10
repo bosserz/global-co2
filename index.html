@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO2 Emission</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+</head>
+<body>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="main.js"></script>
+<div class="container">
+    
+    <!-- title -->
+    <h1 class="text-center mt-5">Exploring Global CO₂ Emissions: Trends, Regions & Economy</h1>
+    <h4 class="text-center">Thanawit Suwannikom</h4>
+    <hr>
+    <p>
+        This page presents an interactive visualizations of CO₂ emissions of countries and regions along with inflation-adjusted 
+        and cost-of-living-adjusted Gross Domestic Product (GDP) (refer to <a href="#ref-1">[1]</a> for details) with the data spans from 1990 to 2022. 
+    </p>
+    <p>
+        The bar chart shows amount of CO₂ emissions by each region within the selected year. You can select a bar to filter the sunburst chart 
+        to see the distribution of CO₂ emissions at the sub-region and country levels.
+    </p>
+    <p>
+        When click on any area in the sunburst chart, it will filter the scatter plot to show only the countries within the selected region or sub-region 
+        from the clicked sunburst chart.
+    </p>
+    <p>
+        You can use a brush on the scatter plot to see the trend of CO₂ emission by the highlighted countries from the scatter plot.
+    </p>
+    
+    <div id="regionLegend" class="color-legend">
+        <strong>Region Colors</strong>
+        <div id="legendItems"></div>
+    </div>
+
+    <p class="text-center text-instruction">
+        The default year is set to be 2022, feel free to change the year to see how much each region emitted CO₂ in that year.
+    </p>
+    <!-- bar chart -->
+    <div id="barChart" class="text-center mt-5 mb-3">
+        <h3>CO₂ Emissions by Region in 2022</h3>
+        <select id="yearSelect" class="form-select" style="width: 200px; margin: 0 auto;"></select>
+        <div id="barTooltip" class="chartTooltip"></div>
+    </div>
+    <p class="text-center text-narrative">
+        According to year 2022, Asia is the highest CO₂-emitting region, followed by the Americas, Europe, Africa, and Oceania.
+    </p>
+
+    <p class="text-center text-instruction">
+        You can click on any bar on the bar chart to see the distribution of CO₂ emission at the sub-region and country levels 
+        from the following sunburst chart. Since some region cannot see clear distribution because of smaller portion than other region 
+        e.g. Africa and Oceania.
+    </p>
+
+    <!-- sunburst chart -->
+    <div id="sunburstChart" class="text-center mt-3 mb-3">
+        <h3>Global CO₂ Emissions Structure: From Regions to Countries (2022)</h3>
+    </div>
+    <div id="sunburstTooltip" class="chartTooltip"></div>
+
+    <p class="text-center text-narrative">
+        Within each region and sub-region, certain countries dominate CO₂ emissions. 
+        For example, Eastern Asia is dominated by China, Southern Asia by India, 
+        North America by the United States, and Eastern Europe by Russia.
+    </p>
+
+    <p class="text-center text-instruction">
+        Click on a region or sub-region to filter the following scatter plot to see the relationship between CO₂ emission and 
+        GDP by country.
+    </p>
+
+    <!-- scatter plot -->
+    <div id="scatterPlot" class="text-center mt-3 mb-3">
+        <h3 id="scatterPlotTitle">CO₂ Emission vs GDP by Country in 2022 (Linear Scale)</h3>
+        <p>Size of the bubbles indicate the number of population in the countries.</p>
+        <p class="text-center text-instruction">
+            To remove large disparity in value, click on the Show Log Scale button below to see the plot in log scale.
+        </p>
+        <button id="toggleLog" class="btn btn-light" style="margin-bottom: 10px;">Show Log Scale</button>
+        <div id="scatterPlotNormal">
+            <div id="scatterTooltip" class="chartTooltip"></div>
+        </div>
+    </div>
+
+    <p class="text-center text-instruction">
+        The scatter plot has the square selector brush, you can use it to select the countries and show the trend line in the below line graph.
+    </p>
+
+    <!-- line graph -->
+    
+    <div id="lineGraph" class="text-center mt-3 mb-3">
+        <h3 id="lineGraphTitle">CO₂ Emissions Over Time by Country (1990 - 2022)</h3>
+        <div id="countryLineGraph">
+            <div id="lineTooltip" class="chartTooltip"></div>
+        </div>
+    </div>
+
+    <p class="text-center text-narrative">
+        The default line graph shows trend line of the top 5 countries which emitted the most CO₂ in 2022.
+    </p>
+    
+    <hr>
+
+    <div>
+        <h6>References & Data Source</h6>
+        <ol id="references">
+            <li id="ref-1"> 
+                <a href="https://ourworldindata.org/co2-emissions">
+                    CO₂ emissions by ourworldindata.org
+                </a>
+            </li>
+            <li id="ref-2">
+                <a href="https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes/blob/master/all/all.csv">
+                    Countries with regional codes
+                </a>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+</body>
+</html>
